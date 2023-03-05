@@ -3,7 +3,7 @@ package sparkCore
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
 
-object Op_MapPartitions extends App {
+object Op_mapPartitions extends App {
   val conf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("CreateRDD")
   val sc: SparkContext = new SparkContext(conf)
 
