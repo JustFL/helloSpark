@@ -22,7 +22,7 @@ object Op_aggregateByKey {
 
     // 分区内取最大值 分区间相加
     val rdd1: RDD[(String, Int)] = sc.makeRDD(List(("a", 1), ("a", 3), ("a", 7), ("a", 4)), 2)
-    rdd1.aggregateByKey(0)((x, y) => math.max(x, y), (x, y) => x + y).collect().foreach(println)
+    rdd1.aggregateByKey(5)((x, y) => math.max(x, y), (x, y) => x + y).collect().foreach(println)
 
 
     println("------------")
