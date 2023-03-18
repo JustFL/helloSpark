@@ -19,6 +19,7 @@ object SparkCustomUDAF {
     session.close()
   }
 
+  // 弱类型 根据索引来操作
   class MyAvg extends UserDefinedAggregateFunction {
 
     // 输入数据的结构
