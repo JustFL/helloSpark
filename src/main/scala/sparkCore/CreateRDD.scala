@@ -20,6 +20,11 @@ import org.apache.spark.{SparkConf, SparkContext}
  */
 object CreateRDD {
   def main(args: Array[String]): Unit = {
+    /*
+    local 使用一个工作线程在本地运行Spark(即根本没有并行性).
+    local[K] 使用K个工作线程在本地运行Spark(理想情况下 将其设置为计算机上的核心数)
+    local[*] 使用与计算机上的逻辑核心一样多的工作线程在本地运行Spark
+     */
     val conf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("CreateRDD")
     val sc: SparkContext = new SparkContext(conf)
 
