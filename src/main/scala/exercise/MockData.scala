@@ -2,7 +2,8 @@ package exercise
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 
-import java.util.Properties
+import java.text.SimpleDateFormat
+import java.util.{Date, Properties}
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
@@ -26,12 +27,14 @@ object MockData {
       val datas: ListBuffer[String] = Mock()
 
       for (elem <- datas) {
+        println(elem)
         val record: ProducerRecord[String, String] = new ProducerRecord[String, String]("exercise_topic", elem)
         producer.send(record)
       }
 
+
       // 休息
-      Thread.sleep(1000)
+      Thread.sleep(1500)
     }
 
   }
@@ -48,7 +51,8 @@ object MockData {
 
       var data: String = ""
 
-      val timestamp: Long = System.currentTimeMillis()
+      val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
+      val date: String = df.format(new Date(System.currentTimeMillis()))
 
       val areas: Seq[String] = Seq("山西", "山东", "河南", "河北")
       val area: String = areas(new Random().nextInt(areas.length))
@@ -59,7 +63,7 @@ object MockData {
       val userid = new Random().nextInt(5)
       val adid = new Random().nextInt(8)
 
-      data = timestamp + " " + area + " " + city + " " + userid + " " + adid
+      data = date + " " + area + " " + city + " " + userid + " " + adid
       datas.append(data)
     }
     datas

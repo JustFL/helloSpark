@@ -13,4 +13,12 @@ object PropUtil {
 
     props.getProperty(key)
   }
+
+  def getProperties(file: String = "/exercise.properties"): Properties = {
+    val input: InputStream = this.getClass.getResourceAsStream(file)
+    val props: Properties = new Properties()
+    props.load(input)
+    props
+  }
+
 }
