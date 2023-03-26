@@ -37,7 +37,8 @@ object HDFSUtil {
     fs.close()
   }
 
-  def main(args: Array[String]): Unit = {
-    writeToHdfs("hello world")
+  def sparkStreamingStop: Boolean = {
+    val fs: FileSystem = FileSystem.get(new URI("hdfs://bigdata02:8020"), new Configuration(), "root")
+    fs.exists(new Path("/sparkStreamingStop"))
   }
 }
