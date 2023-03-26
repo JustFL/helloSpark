@@ -1,5 +1,6 @@
 package sparkStreaming
 
+import exercise.HDFSUtil
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.{Seconds, StreamingContext}
@@ -27,9 +28,15 @@ object HelloForeachRDD {
      */
     val wcDStream: DStream[(String, Int)] = ssc.socketTextStream("bigdata01", 7777).map(x => (x, 1)).reduceByKey(_ + _)
 
+    // 这里想实现将文件存储到hdfs
     wcDStream.foreachRDD(
       rdd => {
-        //
+        rdd.foreach {
+          case (word, count) => {
+            println(word + "," + count)
+            HDFSUtil.writeToHdfs(word + "," + count)
+          }
+        }
       }
     )
 
